@@ -35,7 +35,17 @@ def select(id):
         album = Album(result["title"], result["genre"], result["artist_id"])
     return album
 
+def update(album):
+    sql = "UPDATE albums SET (title, genre, artist_id) = (%s, %s, %s) WHERE id = %s"
+    values = [album.title, album.genre, album.artist, album.id]
+    run_sql(sql, values)
 
 def delete_all():
     sql = "DELETE FROM albums"
     run_sql(sql)
+
+def delete(id):
+    sql = "DELETE FROM albums WHERE id = %s"
+    values = [id]
+    run_sql(sql, values)
+
